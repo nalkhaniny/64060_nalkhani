@@ -1,0 +1,62 @@
+---
+title: "Assignment 1"
+author: "Noorah"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library()
+
+df<- read.csv("~/Desktop/spring 2021/ML/norah/cereal.csv")
+
+small.df = df [c(1:10),c(1:8)]
+print (small.df)
+str(df)
+```
+#Print out descriptive statistics for a selection of quantitative and categorical variables
+##Quantitative variables
+**cereal calories**
+```{r}
+class(df$calories)
+summary(df$calories)
+hist(df$calories,
+     main="Histgram for calories",
+     xlab="calories",
+     border = "darkgreen",
+     col = "lightgreen",
+     xlim = c(50,130),
+     ylab = "The frequancy of calories",
+     las=1,
+     breaks = 10)
+```
+##Categorical variables
+**cereal manufacture**
+```{r}
+class(df$mfr)
+table(df$mfr)
+mypct= round((table(df$mfr))/(sum(table(df$mfr)))*100)
+lbls=paste(names(table(df$mfr)),mypct,"%")
+pie(table(df$mfr),lbls,main = "pie chart of manufacture")
+```
+
+#Transform at least one variable
+```{r}
+class(df$mfr)
+class(as.factor(df$type))
+```
+
+#Plot at least one quantitative variable, and one scatterplot
+```{r}
+counts <- table(df$calories,df$fat)
+barplot(counts, main= "calories vs protein",
+        xlab="protein",
+        col=c("blue","yellow"),
+        legend=rownames(counts),beside=TRUE)
+```
+
+```{r}
+plot(df$calories)
+```
+

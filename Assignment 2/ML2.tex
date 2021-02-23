@@ -1,0 +1,784 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Assignment 2},
+  pdfauthor={Nourah},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Assignment 2}
+\author{Nourah}
+\date{2/21/2021}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# First I Will Install Packages}
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(class)}
+\FunctionTok{library}\NormalTok{(gmodels)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(FNN)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'FNN'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:class':
+## 
+##     knn, knn.cv
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dummies)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## dummies-1.5.6 provided by Decision Patterns
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fastDummies)}
+\FunctionTok{library}\NormalTok{(e1071)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Second I will Import the CSV File}
+\NormalTok{df }\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\AttributeTok{file=}\StringTok{"\textasciitilde{}/Desktop/spring 2021/ML/ML2/UniversalBank.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Perform a k{-}NN classification with all predictors except ID and ZIP code using k = 1}
+\NormalTok{df}\OtherTok{\textless{}{-}}\NormalTok{df[,}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{)]}
+\FunctionTok{str}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    5000 obs. of  12 variables:
+##  $ Age               : int  25 45 39 35 35 37 53 50 35 34 ...
+##  $ Experience        : int  1 19 15 9 8 13 27 24 10 9 ...
+##  $ Income            : int  49 34 11 100 45 29 72 22 81 180 ...
+##  $ Family            : int  4 3 1 1 4 4 2 1 3 1 ...
+##  $ CCAvg             : num  1.6 1.5 1 2.7 1 0.4 1.5 0.3 0.6 8.9 ...
+##  $ Education         : int  1 1 1 2 2 2 2 3 2 3 ...
+##  $ Mortgage          : int  0 0 0 0 0 155 0 0 104 0 ...
+##  $ Personal.Loan     : int  0 0 0 0 0 0 0 0 0 1 ...
+##  $ Securities.Account: int  1 1 0 0 0 0 0 0 0 0 ...
+##  $ CD.Account        : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ Online            : int  0 0 0 0 0 1 1 0 1 0 ...
+##  $ CreditCard        : int  0 0 0 0 1 0 0 1 0 0 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Transform categorical predictors with more than two categories into dummy variables}
+\NormalTok{dummymodel }\OtherTok{\textless{}{-}} \FunctionTok{dummyVars}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{Education,}\AttributeTok{data=}\NormalTok{df)}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{predict}\NormalTok{(dummymodel,df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Education
+## 1         1
+## 2         1
+## 3         1
+## 4         2
+## 5         2
+## 6         2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dummymodel }\OtherTok{\textless{}{-}} \FunctionTok{dummyVars}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{Family, }\AttributeTok{data=}\NormalTok{df)}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{predict}\NormalTok{(dummymodel,df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Family
+## 1      4
+## 2      3
+## 3      1
+## 4      1
+## 5      4
+## 6      4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#transform categorical predictors with more than two categories into dummy variables}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{Education}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Education)}
+\NormalTok{dummy\_model}\OtherTok{\textless{}{-}}\FunctionTok{dummyVars}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{.,}\AttributeTok{data=}\NormalTok{df)}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{predict}\NormalTok{(dummy\_model,df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Experience Income Family CCAvg Education.1 Education.2 Education.3
+## 1  25          1     49      4   1.6           1           0           0
+## 2  45         19     34      3   1.5           1           0           0
+## 3  39         15     11      1   1.0           1           0           0
+## 4  35          9    100      1   2.7           0           1           0
+## 5  35          8     45      4   1.0           0           1           0
+## 6  37         13     29      4   0.4           0           1           0
+##   Mortgage Personal.Loan Securities.Account CD.Account Online CreditCard
+## 1        0             0                  1          0      0          0
+## 2        0             0                  1          0      0          0
+## 3        0             0                  0          0      0          0
+## 4        0             0                  0          0      0          0
+## 5        0             0                  0          0      0          1
+## 6      155             0                  0          0      1          0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{predict}\NormalTok{(dummy\_model, }\AttributeTok{newdata=}\NormalTok{df))}
+
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{Family}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Family)}
+\NormalTok{dummy\_model}\OtherTok{\textless{}{-}}\FunctionTok{dummyVars}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{.,}\AttributeTok{data=}\NormalTok{df)}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{predict}\NormalTok{(dummy\_model,df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Experience Income Family.1 Family.2 Family.3 Family.4 CCAvg Education.1
+## 1  25          1     49        0        0        0        1   1.6           1
+## 2  45         19     34        0        0        1        0   1.5           1
+## 3  39         15     11        1        0        0        0   1.0           1
+## 4  35          9    100        1        0        0        0   2.7           0
+## 5  35          8     45        0        0        0        1   1.0           0
+## 6  37         13     29        0        0        0        1   0.4           0
+##   Education.2 Education.3 Mortgage Personal.Loan Securities.Account CD.Account
+## 1           0           0        0             0                  1          0
+## 2           0           0        0             0                  1          0
+## 3           0           0        0             0                  0          0
+## 4           1           0        0             0                  0          0
+## 5           1           0        0             0                  0          0
+## 6           1           0      155             0                  0          0
+##   Online CreditCard
+## 1      0          0
+## 2      0          0
+## 3      0          0
+## 4      0          0
+## 5      0          1
+## 6      1          0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{predict}\NormalTok{(dummy\_model, }\AttributeTok{newdata=}\NormalTok{df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Preparation for data splitting and validation}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\NormalTok{train.rows }\OtherTok{\textless{}{-}}\FunctionTok{sample}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(df1), }\FunctionTok{dim}\NormalTok{(df1)[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\NormalTok{.}\DecValTok{6}\NormalTok{)}
+\NormalTok{train.data }\OtherTok{\textless{}{-}}\NormalTok{ df1[train.rows, ]}
+\NormalTok{valid.rows }\OtherTok{\textless{}{-}} \FunctionTok{setdiff}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(df1), train.rows)}
+\NormalTok{valid.data }\OtherTok{\textless{}{-}}\NormalTok{ df1[valid.rows, ]}
+\FunctionTok{summary}\NormalTok{(train.data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Age          Experience        Income          Family.1     
+##  Min.   :23.00   Min.   :-3.00   Min.   :  8.00   Min.   :0.0000  
+##  1st Qu.:35.00   1st Qu.:10.00   1st Qu.: 39.00   1st Qu.:0.0000  
+##  Median :45.00   Median :20.00   Median : 64.00   Median :0.0000  
+##  Mean   :45.27   Mean   :20.03   Mean   : 74.27   Mean   :0.2937  
+##  3rd Qu.:56.00   3rd Qu.:30.00   3rd Qu.:101.00   3rd Qu.:1.0000  
+##  Max.   :67.00   Max.   :43.00   Max.   :224.00   Max.   :1.0000  
+##     Family.2        Family.3        Family.4          CCAvg       
+##  Min.   :0.000   Min.   :0.000   Min.   :0.0000   Min.   : 0.000  
+##  1st Qu.:0.000   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.: 0.700  
+##  Median :0.000   Median :0.000   Median :0.0000   Median : 1.600  
+##  Mean   :0.259   Mean   :0.197   Mean   :0.2503   Mean   : 1.963  
+##  3rd Qu.:1.000   3rd Qu.:0.000   3rd Qu.:1.0000   3rd Qu.: 2.600  
+##  Max.   :1.000   Max.   :1.000   Max.   :1.0000   Max.   :10.000  
+##   Education.1      Education.2      Education.3       Mortgage     
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.000   Min.   :  0.00  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:  0.00  
+##  Median :0.0000   Median :0.0000   Median :0.000   Median :  0.00  
+##  Mean   :0.4183   Mean   :0.2767   Mean   :0.305   Mean   : 56.67  
+##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.000   3rd Qu.:102.00  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :1.000   Max.   :601.00  
+##  Personal.Loan     Securities.Account   CD.Account          Online     
+##  Min.   :0.00000   Min.   :0.0000     Min.   :0.00000   Min.   :0.000  
+##  1st Qu.:0.00000   1st Qu.:0.0000     1st Qu.:0.00000   1st Qu.:0.000  
+##  Median :0.00000   Median :0.0000     Median :0.00000   Median :1.000  
+##  Mean   :0.09733   Mean   :0.1093     Mean   :0.06267   Mean   :0.604  
+##  3rd Qu.:0.00000   3rd Qu.:0.0000     3rd Qu.:0.00000   3rd Qu.:1.000  
+##  Max.   :1.00000   Max.   :1.0000     Max.   :1.00000   Max.   :1.000  
+##    CreditCard    
+##  Min.   :0.0000  
+##  1st Qu.:0.0000  
+##  Median :0.0000  
+##  Mean   :0.3023  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(valid.data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Age          Experience        Income          Family.1     
+##  Min.   :23.00   Min.   :-2.00   Min.   :  8.00   Min.   :0.0000  
+##  1st Qu.:36.00   1st Qu.:11.00   1st Qu.: 38.00   1st Qu.:0.0000  
+##  Median :46.00   Median :20.00   Median : 63.00   Median :0.0000  
+##  Mean   :45.44   Mean   :20.22   Mean   : 73.04   Mean   :0.2955  
+##  3rd Qu.:55.00   3rd Qu.:29.00   3rd Qu.: 94.25   3rd Qu.:1.0000  
+##  Max.   :67.00   Max.   :43.00   Max.   :205.00   Max.   :1.0000  
+##     Family.2         Family.3         Family.4          CCAvg     
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   : 0.0  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.: 0.7  
+##  Median :0.0000   Median :0.0000   Median :0.0000   Median : 1.5  
+##  Mean   :0.2595   Mean   :0.2095   Mean   :0.2355   Mean   : 1.9  
+##  3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:0.0000   3rd Qu.: 2.5  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :10.0  
+##   Education.1      Education.2      Education.3       Mortgage     
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.000   Min.   :  0.00  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:  0.00  
+##  Median :0.0000   Median :0.0000   Median :0.000   Median :  0.00  
+##  Mean   :0.4205   Mean   :0.2865   Mean   :0.293   Mean   : 56.23  
+##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.000   3rd Qu.:100.00  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :1.000   Max.   :635.00  
+##  Personal.Loan   Securities.Account   CD.Account        Online     
+##  Min.   :0.000   Min.   :0.000      Min.   :0.000   Min.   :0.000  
+##  1st Qu.:0.000   1st Qu.:0.000      1st Qu.:0.000   1st Qu.:0.000  
+##  Median :0.000   Median :0.000      Median :0.000   Median :1.000  
+##  Mean   :0.094   Mean   :0.097      Mean   :0.057   Mean   :0.586  
+##  3rd Qu.:0.000   3rd Qu.:0.000      3rd Qu.:0.000   3rd Qu.:1.000  
+##  Max.   :1.000   Max.   :1.000      Max.   :1.000   Max.   :1.000  
+##    CreditCard    
+##  Min.   :0.0000  
+##  1st Qu.:0.0000  
+##  Median :0.0000  
+##  Mean   :0.2815  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Normalizing}
+\NormalTok{train\_normalization }\OtherTok{\textless{}{-}}\NormalTok{train.data}
+\NormalTok{valid\_normalization }\OtherTok{\textless{}{-}}\NormalTok{valid.data}
+\NormalTok{normalization.values }\OtherTok{\textless{}{-}} \FunctionTok{preProcess}\NormalTok{(train.data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)], }\AttributeTok{method=}\FunctionTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{, }\StringTok{"scale"}\NormalTok{))}
+\NormalTok{train\_normalization[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(normalization.values, train.data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)])}
+\NormalTok{valid\_normalization[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(normalization.values, valid.data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)])}
+\FunctionTok{summary}\NormalTok{(train\_normalization)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Age             Experience            Income           Family.1     
+##  Min.   :-1.91217   Min.   :-1.979430   Min.   :-1.4449   Min.   :0.0000  
+##  1st Qu.:-0.88170   1st Qu.:-0.861934   1st Qu.:-0.7689   1st Qu.:0.0000  
+##  Median :-0.02298   Median :-0.002321   Median :-0.2238   Median :0.0000  
+##  Mean   : 0.00000   Mean   : 0.000000   Mean   : 0.0000   Mean   :0.2937  
+##  3rd Qu.: 0.92161   3rd Qu.: 0.857292   3rd Qu.: 0.5829   3rd Qu.:1.0000  
+##  Max.   : 1.86620   Max.   : 1.974789   Max.   : 3.2647   Max.   :1.0000  
+##     Family.2        Family.3        Family.4          CCAvg        
+##  Min.   :0.000   Min.   :0.000   Min.   :0.0000   Min.   :-1.1183  
+##  1st Qu.:0.000   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:-0.7196  
+##  Median :0.000   Median :0.000   Median :0.0000   Median :-0.2069  
+##  Mean   :0.259   Mean   :0.197   Mean   :0.2503   Mean   : 0.0000  
+##  3rd Qu.:1.000   3rd Qu.:0.000   3rd Qu.:1.0000   3rd Qu.: 0.3628  
+##  Max.   :1.000   Max.   :1.000   Max.   :1.0000   Max.   : 4.5784  
+##   Education.1      Education.2      Education.3       Mortgage      
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.000   Min.   :-0.5568  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:-0.5568  
+##  Median :0.0000   Median :0.0000   Median :0.000   Median :-0.5568  
+##  Mean   :0.4183   Mean   :0.2767   Mean   :0.305   Mean   : 0.0000  
+##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.000   3rd Qu.: 0.4453  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :1.000   Max.   : 5.3481  
+##  Personal.Loan     Securities.Account   CD.Account          Online     
+##  Min.   :0.00000   Min.   :0.0000     Min.   :0.00000   Min.   :0.000  
+##  1st Qu.:0.00000   1st Qu.:0.0000     1st Qu.:0.00000   1st Qu.:0.000  
+##  Median :0.00000   Median :0.0000     Median :0.00000   Median :1.000  
+##  Mean   :0.09733   Mean   :0.1093     Mean   :0.06267   Mean   :0.604  
+##  3rd Qu.:0.00000   3rd Qu.:0.0000     3rd Qu.:0.00000   3rd Qu.:1.000  
+##  Max.   :1.00000   Max.   :1.0000     Max.   :1.00000   Max.   :1.000  
+##    CreditCard    
+##  Min.   :0.0000  
+##  1st Qu.:0.0000  
+##  Median :0.0000  
+##  Mean   :0.3023  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Q1 {-} Age = 40, Experience = 10, Income = 84, Family = 2, CCAvg = 2, Education\_1 = 0, Education\_2 = 1, Education\_3 = 0, Mortgage = 0, Securities Account = 0, CD Account = 0, Online = 1, and Credit Card = 1. Perform a k{-}NN classification with all predictors except ID and ZIP code using k = 1. Remember to transform categorical predictors with more than two categories into dummy variables first. Specify the success class as 1 (loan acceptance), and use the default cutoff value of 0.5. How would this customer be classified?}
+
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Age =} \DecValTok{40}\NormalTok{, }\AttributeTok{Experience =} \DecValTok{10}\NormalTok{, }\AttributeTok{Income =} \DecValTok{84}\NormalTok{, }\AttributeTok{CCAvg =} \DecValTok{2}\NormalTok{,}
+                       \AttributeTok{Mortgage =} \DecValTok{0}\NormalTok{, }\AttributeTok{Securities.Account =} \DecValTok{0}\NormalTok{, }\AttributeTok{CD.Account =} \DecValTok{0}\NormalTok{, }
+                       \AttributeTok{Online =} \DecValTok{1}\NormalTok{, }\AttributeTok{CreditCard =}\DecValTok{1}\NormalTok{, }\AttributeTok{Family\_1 =} \DecValTok{0}\NormalTok{, }\AttributeTok{Family\_2 =} \DecValTok{1}\NormalTok{, }
+                       \AttributeTok{Family\_3 =} \DecValTok{0}\NormalTok{, }\AttributeTok{Family\_4 =} \DecValTok{0}\NormalTok{, }\AttributeTok{Education\_1 =} \DecValTok{0}\NormalTok{, }
+                       \AttributeTok{Education\_2 =} \DecValTok{1}\NormalTok{, }\AttributeTok{Education\_3 =} \DecValTok{0}\NormalTok{)}
+\NormalTok{df3 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(normalization.values, df2)}
+\FunctionTok{print}\NormalTok{(df3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Age Experience    Income      CCAvg   Mortgage Securities.Account
+## 1 -0.4523446 -0.8619338 0.2122216 0.02100374 -0.5568407                  0
+##   CD.Account Online CreditCard Family_1 Family_2 Family_3 Family_4 Education_1
+## 1          0      1          1        0        1        0        0           0
+##   Education_2 Education_3
+## 1           1           0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Predictors}
+
+\NormalTok{predictors }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{,}\DecValTok{7}\SpecialCharTok{:}\DecValTok{17}\NormalTok{)}
+\NormalTok{nn }\OtherTok{\textless{}{-}} \FunctionTok{knn}\NormalTok{(}\AttributeTok{train=}\NormalTok{train\_normalization[, predictors], }\AttributeTok{test=}\NormalTok{df3, }\AttributeTok{cl=}\NormalTok{train\_normalization[, }\DecValTok{6}\NormalTok{], }\AttributeTok{k=}\DecValTok{1}\NormalTok{)}
+\FunctionTok{row.names}\NormalTok{(train\_normalization)[}\FunctionTok{attr}\NormalTok{(nn, }\StringTok{"nn.index"}\NormalTok{)] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2736"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(train\_normalization[}\FunctionTok{attr}\NormalTok{(nn, }\StringTok{"nn.index"}\NormalTok{),]) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             Age Experience      Income Family.1 Family.2 Family.3 Family.4
+## 2736 -0.7958322 -0.6900112 -0.09302866        0        0        1        0
+##          CCAvg Education.1 Education.2 Education.3 Mortgage Personal.Loan
+## 2736 0.3628059           0           1           0  1.06432             0
+##      Securities.Account CD.Account Online CreditCard
+## 2736                  0          0      1          0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nn[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## Levels: 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# No personal loan, it will be classified to nearest neighbor which is 0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Q2 {-} What is a choice of k that balances between overfitting and ignoring the predictor information?}
+
+\NormalTok{df4 }\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{k=}\FunctionTok{seq}\NormalTok{ (}\DecValTok{1}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{accuracy=} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{14}\NormalTok{), }\AttributeTok{sensitivity =} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{14}\NormalTok{), }\AttributeTok{specificity =} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{14}\NormalTok{), }\AttributeTok{PPV=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{14}\NormalTok{), }\AttributeTok{NPV=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{14}\NormalTok{), }\AttributeTok{F1=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{14}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{14}\NormalTok{)}
+\NormalTok{\{ }
+\NormalTok{  knn1 }\OtherTok{\textless{}{-}} \FunctionTok{knn}\NormalTok{(train\_normalization[,predictors], valid\_normalization[,predictors], }\AttributeTok{cl =} \FunctionTok{as.factor}\NormalTok{(train\_normalization[, }\DecValTok{6}\NormalTok{]), }\AttributeTok{k =}\NormalTok{ i)}
+\NormalTok{  knn2 }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(knn1, }\FunctionTok{as.factor}\NormalTok{(valid\_normalization[, }\DecValTok{6}\NormalTok{]), }\AttributeTok{positive=}\StringTok{"1"}\NormalTok{)}
+\NormalTok{  df4[i, }\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ knn2}\SpecialCharTok{$}\NormalTok{overall[}\DecValTok{1}\NormalTok{] }\CommentTok{\#Accuracy}
+\NormalTok{  df4[i, }\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ knn2}\SpecialCharTok{$}\NormalTok{byClass[}\FunctionTok{c}\NormalTok{(}\StringTok{"Sensitivity"}\NormalTok{)]}
+\NormalTok{  df4[i, }\DecValTok{4}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ knn2}\SpecialCharTok{$}\NormalTok{byClass[}\FunctionTok{c}\NormalTok{(}\StringTok{"Specificity"}\NormalTok{)]}
+\NormalTok{  df4[i, }\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ knn2}\SpecialCharTok{$}\NormalTok{byClass[}\FunctionTok{c}\NormalTok{(}\StringTok{"Precision"}\NormalTok{)]}
+\NormalTok{  df4[i, }\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ knn2}\SpecialCharTok{$}\NormalTok{byClass[}\FunctionTok{c}\NormalTok{(}\StringTok{"Positive Predected Value"}\NormalTok{)]}
+\NormalTok{  df4[i, }\DecValTok{7}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ knn2}\SpecialCharTok{$}\NormalTok{byClass[}\FunctionTok{c}\NormalTok{(}\StringTok{"Negative Predected Value"}\NormalTok{)]}
+\NormalTok{  df4[i, }\DecValTok{8}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ knn2}\SpecialCharTok{$}\NormalTok{byClass[}\FunctionTok{c}\NormalTok{(}\StringTok{"F"}\NormalTok{)]}
+\NormalTok{\}}
+\NormalTok{df4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     k accuracy sensitivity specificity       PPV NPV F1 V8
+## 1   1   0.9635   0.9212411   0.9746996 0.9061033  NA NA NA
+## 2   2   0.9570   0.8162291   0.9943074 0.9743590  NA NA NA
+## 3   3   0.9675   0.8926014   0.9873498 0.9492386  NA NA NA
+## 4   4   0.9575   0.8114558   0.9962049 0.9826590  NA NA NA
+## 5   5   0.9670   0.8782816   0.9905123 0.9608355  NA NA NA
+## 6   6   0.9560   0.8066826   0.9955724 0.9797101  NA NA NA
+## 7   7   0.9595   0.8424821   0.9905123 0.9592391  NA NA NA
+## 8   8   0.9480   0.7684964   0.9955724 0.9787234  NA NA NA
+## 9   9   0.9555   0.8162291   0.9924099 0.9661017  NA NA NA
+## 10 10   0.9440   0.7446301   0.9968374 0.9842271  NA NA NA
+## 11 11   0.9495   0.7852029   0.9930424 0.9676471  NA NA NA
+## 12 12   0.9425   0.7350835   0.9974700 0.9871795  NA NA NA
+## 13 13   0.9435   0.7589499   0.9924099 0.9636364  NA NA NA
+## 14 14   0.9410   0.7303103   0.9968374 0.9839228  NA NA NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# as the result show, we have the highest sensitivity from K=3}
+
+\NormalTok{knn1}\OtherTok{\textless{}{-}}\FunctionTok{knn}\NormalTok{(train\_normalization[, predictors], valid\_normalization [, predictors], }\AttributeTok{cl=}\FunctionTok{as.factor}\NormalTok{(train\_normalization[,}\DecValTok{6}\NormalTok{]),}\AttributeTok{k=}\DecValTok{3}\NormalTok{)}
+\NormalTok{knn4}\OtherTok{\textless{}{-}} \FunctionTok{CrossTable}\NormalTok{(}\AttributeTok{x=}\NormalTok{valid\_normalization[,}\DecValTok{6}\NormalTok{], }\AttributeTok{y=}\NormalTok{knn1, }\AttributeTok{prop.chisq =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  2000 
+## 
+##  
+##                          | knn1 
+## valid_normalization[, 6] |         0 |         1 | Row Total | 
+## -------------------------|-----------|-----------|-----------|
+##                        0 |      1561 |        20 |      1581 | 
+##                          |     0.987 |     0.013 |     0.790 | 
+##                          |     0.972 |     0.051 |           | 
+##                          |     0.780 |     0.010 |           | 
+## -------------------------|-----------|-----------|-----------|
+##                        1 |        45 |       374 |       419 | 
+##                          |     0.107 |     0.893 |     0.209 | 
+##                          |     0.028 |     0.949 |           | 
+##                          |     0.022 |     0.187 |           | 
+## -------------------------|-----------|-----------|-----------|
+##             Column Total |      1606 |       394 |      2000 | 
+##                          |     0.803 |     0.197 |           | 
+## -------------------------|-----------|-----------|-----------|
+## 
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Q4{-} Consider the following customer: Age = 40, Experience = 10, Income = 84,Family = 2, CCAvg = 2, Education\_1 = 0, Education\_2 = 1, Education\_3 = 0, Mortgage = 0, Securities Account = 0, CD Account = 0, Online = 1 and Credit Card = 1. Classify the customer using the best k}
+
+\NormalTok{knn5 }\OtherTok{\textless{}{-}} \FunctionTok{knn}\NormalTok{(}\AttributeTok{train=}\NormalTok{train\_normalization[, predictors], }\AttributeTok{test=}\NormalTok{df3, }\AttributeTok{cl=}\NormalTok{train\_normalization[, }\DecValTok{6}\NormalTok{], }\AttributeTok{k=}\DecValTok{3}\NormalTok{, }\AttributeTok{prob=}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(train\_normalization[}\FunctionTok{attr}\NormalTok{(knn5, }\StringTok{"knn5.index"}\NormalTok{),]) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] Age                Experience         Income             Family.1          
+##  [5] Family.2           Family.3           Family.4           CCAvg             
+##  [9] Education.1        Education.2        Education.3        Mortgage          
+## [13] Personal.Loan      Securities.Account CD.Account         Online            
+## [17] CreditCard        
+## <0 rows> (or 0-length row.names)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knn5[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+## Levels: 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#using 1 because 0 will mean not accept loan   }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Q5{-} Repartition the data, this time into training, validation, and test sets (50\% : 30\% : 20\%). Apply the k{-}NN method with the k chosen above. Compare the confusion matrix of the test set with that of the training and validation sets. Comment on the differences and their reason.}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\NormalTok{test.index }\OtherTok{=} \FunctionTok{createDataPartition}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{Personal.Loan,}\AttributeTok{p=}\FloatTok{0.2}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{test.data }\OtherTok{=}\NormalTok{ df1[test.index,]}
+\NormalTok{trainvalid.data }\OtherTok{=}\NormalTok{ df1[}\SpecialCharTok{{-}}\NormalTok{test.index,]}
+\NormalTok{train.index }\OtherTok{=} \FunctionTok{createDataPartition}\NormalTok{(trainvalid.data}\SpecialCharTok{$}\NormalTok{Personal.Loan,}\AttributeTok{p=}\FloatTok{0.625}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{train.data }\OtherTok{=}\NormalTok{ trainvalid.data[train.index,]}
+\NormalTok{valid.data }\OtherTok{=}\NormalTok{ trainvalid.data[}\SpecialCharTok{{-}}\NormalTok{train.index,]}
+\NormalTok{Train.D }\OtherTok{\textless{}{-}} \FunctionTok{colMeans}\NormalTok{(train.data)}
+\NormalTok{Valid.D }\OtherTok{\textless{}{-}} \FunctionTok{colMeans}\NormalTok{(valid.data)}
+\FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.3f"}\NormalTok{, Train.D)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "45.521" "20.304" "74.028" "0.288"  "0.251"  "0.196"  "0.266"  "1.921" 
+##  [9] "0.420"  "0.283"  "0.296"  "57.450" "0.093"  "0.105"  "0.060"  "0.599" 
+## [17] "0.297"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.3f"}\NormalTok{, Valid.D)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "45.182" "19.907" "73.820" "0.297"  "0.271"  "0.216"  "0.217"  "1.936" 
+##  [9] "0.434"  "0.256"  "0.310"  "52.753" "0.097"  "0.101"  "0.067"  "0.586" 
+## [17] "0.299"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{(Train.D)}
+\FunctionTok{rm}\NormalTok{(Valid.D)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\#Normalizing}
+
+\NormalTok{train\_normalization }\OtherTok{\textless{}{-}}\NormalTok{ train.data}
+\NormalTok{valid\_normalization }\OtherTok{\textless{}{-}}\NormalTok{ valid.data}
+\NormalTok{normalization\_values }\OtherTok{\textless{}{-}} \FunctionTok{preProcess}\NormalTok{(train.data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)], }\AttributeTok{method=}\FunctionTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{, }\StringTok{"scale"}\NormalTok{))}
+\NormalTok{train\_normalization[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(normalization\_values, train.data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)])}
+\NormalTok{valid\_normalization[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(normalization\_values, valid.data[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{,}\StringTok{"Experience"}\NormalTok{,}\StringTok{"Income"}\NormalTok{,}\StringTok{"CCAvg"}\NormalTok{,}\StringTok{"Mortgage"}\NormalTok{)])}
+\FunctionTok{summary}\NormalTok{(train\_normalization) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Age             Experience           Income           Family.1    
+##  Min.   :-1.96834   Min.   :-2.03822   Min.   :-1.4421   Min.   :0.000  
+##  1st Qu.:-0.91955   1st Qu.:-0.81377   1st Qu.:-0.7650   1st Qu.:0.000  
+##  Median : 0.04185   Median : 0.06084   Median :-0.2190   Median :0.000  
+##  Mean   : 0.00000   Mean   : 0.00000   Mean   : 0.0000   Mean   :0.288  
+##  3rd Qu.: 0.82844   3rd Qu.: 0.84798   3rd Qu.: 0.5454   3rd Qu.:1.000  
+##  Max.   : 1.87723   Max.   : 1.98497   Max.   : 2.8604   Max.   :1.000  
+##     Family.2         Family.3         Family.4          CCAvg        
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :-1.1183  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:-0.7109  
+##  Median :0.0000   Median :0.0000   Median :0.0000   Median :-0.2162  
+##  Mean   :0.2508   Mean   :0.1956   Mean   :0.2656   Mean   : 0.0000  
+##  3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.: 0.3367  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   : 4.7020  
+##   Education.1      Education.2      Education.3        Mortgage      
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :-0.5582  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:-0.5582  
+##  Median :0.0000   Median :0.0000   Median :0.0000   Median :-0.5582  
+##  Mean   :0.4204   Mean   :0.2832   Mean   :0.2964   Mean   : 0.0000  
+##  3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.: 0.4523  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   : 5.6117  
+##  Personal.Loan    Securities.Account   CD.Account       Online      
+##  Min.   :0.0000   Min.   :0.0000     Min.   :0.00   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:0.0000     1st Qu.:0.00   1st Qu.:0.0000  
+##  Median :0.0000   Median :0.0000     Median :0.00   Median :1.0000  
+##  Mean   :0.0928   Mean   :0.1048     Mean   :0.06   Mean   :0.5992  
+##  3rd Qu.:0.0000   3rd Qu.:0.0000     3rd Qu.:0.00   3rd Qu.:1.0000  
+##  Max.   :1.0000   Max.   :1.0000     Max.   :1.00   Max.   :1.0000  
+##    CreditCard    
+##  Min.   :0.0000  
+##  1st Qu.:0.0000  
+##  Median :0.0000  
+##  Mean   :0.2972  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(valid\_normalization)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Age             Experience           Income             Family.1     
+##  Min.   :-1.96834   Min.   :-2.03822   Min.   :-1.442057   Min.   :0.0000  
+##  1st Qu.:-0.91955   1st Qu.:-0.90123   1st Qu.:-0.786855   1st Qu.:0.0000  
+##  Median :-0.04555   Median :-0.02662   Median :-0.240852   Median :0.0000  
+##  Mean   :-0.02965   Mean   :-0.03479   Mean   :-0.004543   Mean   :0.2967  
+##  3rd Qu.: 0.82844   3rd Qu.: 0.84798   3rd Qu.: 0.529011   3rd Qu.:1.0000  
+##  Max.   : 1.87723   Max.   : 1.89751   Max.   : 3.144360   Max.   :1.0000  
+##     Family.2         Family.3        Family.4          CCAvg          
+##  Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :-1.118332  
+##  1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:-0.728372  
+##  Median :0.0000   Median :0.000   Median :0.0000   Median :-0.245286  
+##  Mean   :0.2707   Mean   :0.216   Mean   :0.2167   Mean   : 0.008522  
+##  3rd Qu.:1.0000   3rd Qu.:0.000   3rd Qu.:0.0000   3rd Qu.: 0.336744  
+##  Max.   :1.0000   Max.   :1.000   Max.   :1.0000   Max.   : 4.701974  
+##   Education.1     Education.2     Education.3      Mortgage       
+##  Min.   :0.000   Min.   :0.000   Min.   :0.00   Min.   :-0.55821  
+##  1st Qu.:0.000   1st Qu.:0.000   1st Qu.:0.00   1st Qu.:-0.55821  
+##  Median :0.000   Median :0.000   Median :0.00   Median :-0.55821  
+##  Mean   :0.434   Mean   :0.256   Mean   :0.31   Mean   :-0.04564  
+##  3rd Qu.:1.000   3rd Qu.:1.000   3rd Qu.:1.00   3rd Qu.: 0.34785  
+##  Max.   :1.000   Max.   :1.000   Max.   :1.00   Max.   : 5.28136  
+##  Personal.Loan     Securities.Account   CD.Account          Online     
+##  Min.   :0.00000   Min.   :0.0000     Min.   :0.00000   Min.   :0.000  
+##  1st Qu.:0.00000   1st Qu.:0.0000     1st Qu.:0.00000   1st Qu.:0.000  
+##  Median :0.00000   Median :0.0000     Median :0.00000   Median :1.000  
+##  Mean   :0.09667   Mean   :0.1013     Mean   :0.06667   Mean   :0.586  
+##  3rd Qu.:0.00000   3rd Qu.:0.0000     3rd Qu.:0.00000   3rd Qu.:1.000  
+##  Max.   :1.00000   Max.   :1.0000     Max.   :1.00000   Max.   :1.000  
+##    CreditCard    
+##  Min.   :0.0000  
+##  1st Qu.:0.0000  
+##  Median :0.0000  
+##  Mean   :0.2987  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000
+\end{verbatim}
+
+\end{document}

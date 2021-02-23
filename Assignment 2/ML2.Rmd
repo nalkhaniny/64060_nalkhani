@@ -1,0 +1,168 @@
+---
+title: "Assignment 2"
+author: "Nourah"
+date: "2/21/2021"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r}
+### First I Will Install Packages
+library(caret)
+library(class)
+library(gmodels)
+library(ggplot2)
+library(FNN)
+library(dummies)
+library(fastDummies)
+library(e1071)
+library(dplyr)
+```
+
+```{r}
+###Second I will Import the CSV File
+df <-read.csv(file="~/Desktop/spring 2021/ML/ML2/UniversalBank.csv")
+```
+
+```{r}
+###Perform a k-NN classification with all predictors except ID and ZIP code using k = 1
+df<-df[,c(-1,-5)]
+str(df)
+```
+
+
+```{r}
+###Transform categorical predictors with more than two categories into dummy variables
+dummymodel <- dummyVars(~Education,data=df)
+head(predict(dummymodel,df))
+
+dummymodel <- dummyVars(~Family, data=df)
+head(predict(dummymodel,df))
+```
+
+```{r}
+###transform categorical predictors with more than two categories into dummy variables
+df$Education<-as.factor(df$Education)
+dummy_model<-dummyVars(~.,data=df)
+head(predict(dummy_model,df))
+df1<-data.frame(predict(dummy_model, newdata=df))
+
+df$Family<-as.factor(df$Family)
+dummy_model<-dummyVars(~.,data=df)
+head(predict(dummy_model,df))
+df1<-data.frame(predict(dummy_model, newdata=df))
+```
+
+```{r}
+###Preparation for data splitting and validation
+set.seed(2)
+train.rows <-sample(rownames(df1), dim(df1)[1]*.6)
+train.data <- df1[train.rows, ]
+valid.rows <- setdiff(rownames(df1), train.rows)
+valid.data <- df1[valid.rows, ]
+summary(train.data)
+summary(valid.data)
+###Normalizing
+train_normalization <-train.data
+valid_normalization <-valid.data
+normalization.values <- preProcess(train.data[, c("Age","Experience","Income","CCAvg","Mortgage")], method=c("center", "scale"))
+train_normalization[, c("Age","Experience","Income","CCAvg","Mortgage")] <- predict(normalization.values, train.data[, c("Age","Experience","Income","CCAvg","Mortgage")])
+valid_normalization[, c("Age","Experience","Income","CCAvg","Mortgage")] <- predict(normalization.values, valid.data[, c("Age","Experience","Income","CCAvg","Mortgage")])
+summary(train_normalization)
+
+```
+
+
+
+```{r}
+###Q1 - Age = 40, Experience = 10, Income = 84, Family = 2, CCAvg = 2, Education_1 = 0, Education_2 = 1, Education_3 = 0, Mortgage = 0, Securities Account = 0, CD Account = 0, Online = 1, and Credit Card = 1. Perform a k-NN classification with all predictors except ID and ZIP code using k = 1. Remember to transform categorical predictors with more than two categories into dummy variables first. Specify the success class as 1 (loan acceptance), and use the default cutoff value of 0.5. How would this customer be classified?
+
+df2 <- data.frame(Age = 40, Experience = 10, Income = 84, CCAvg = 2,
+                       Mortgage = 0, Securities.Account = 0, CD.Account = 0, 
+                       Online = 1, CreditCard =1, Family_1 = 0, Family_2 = 1, 
+                       Family_3 = 0, Family_4 = 0, Education_1 = 0, 
+                       Education_2 = 1, Education_3 = 0)
+df3 <- predict(normalization.values, df2)
+print(df3)
+      
+```
+
+```{r}
+###Predictors
+
+predictors <- c(1:5,7:17)
+nn <- knn(train=train_normalization[, predictors], test=df3, cl=train_normalization[, 6], k=1)
+row.names(train_normalization)[attr(nn, "nn.index")] 
+print(train_normalization[attr(nn, "nn.index"),]) 
+nn[1]
+
+### No personal loan, it will be classified to nearest neighbor which is 0
+```
+
+```{r}
+###Q2 - What is a choice of k that balances between overfitting and ignoring the predictor information?
+
+df4 <-data.frame(k=seq (1,14,1), accuracy= rep(0,14), sensitivity = rep(0,14), specificity = rep(0,14), PPV=rep(0,14), NPV=rep(0,14), F1=rep(0,14))
+for(i in 1:14)
+{ 
+  knn1 <- knn(train_normalization[,predictors], valid_normalization[,predictors], cl = as.factor(train_normalization[, 6]), k = i)
+  knn2 <- confusionMatrix(knn1, as.factor(valid_normalization[, 6]), positive="1")
+  df4[i, 2] <- knn2$overall[1] #Accuracy
+  df4[i, 3] <- knn2$byClass[c("Sensitivity")]
+  df4[i, 4] <- knn2$byClass[c("Specificity")]
+  df4[i, 5] <- knn2$byClass[c("Precision")]
+  df4[i, 6] <- knn2$byClass[c("Positive Predected Value")]
+  df4[i, 7] <- knn2$byClass[c("Negative Predected Value")]
+  df4[i, 8] <- knn2$byClass[c("F")]
+}
+df4
+
+### as the result show, we have the highest sensitivity from K=3
+
+knn1<-knn(train_normalization[, predictors], valid_normalization [, predictors], cl=as.factor(train_normalization[,6]),k=3)
+knn4<- CrossTable(x=valid_normalization[,6], y=knn1, prop.chisq = FALSE)
+```
+
+```{r}
+### Q4- Consider the following customer: Age = 40, Experience = 10, Income = 84,Family = 2, CCAvg = 2, Education_1 = 0, Education_2 = 1, Education_3 = 0, Mortgage = 0, Securities Account = 0, CD Account = 0, Online = 1 and Credit Card = 1. Classify the customer using the best k
+
+knn5 <- knn(train=train_normalization[, predictors], test=df3, cl=train_normalization[, 6], k=3, prob=TRUE)
+print(train_normalization[attr(knn5, "knn5.index"),]) 
+
+knn5[1]
+
+###using 1 because 0 will mean not accept loan   
+```
+
+```{r}
+### Q5- Repartition the data, this time into training, validation, and test sets (50% : 30% : 20%). Apply the k-NN method with the k chosen above. Compare the confusion matrix of the test set with that of the training and validation sets. Comment on the differences and their reason.
+
+set.seed(5)
+test.index = createDataPartition(df1$Personal.Loan,p=0.2, list=FALSE)
+test.data = df1[test.index,]
+trainvalid.data = df1[-test.index,]
+train.index = createDataPartition(trainvalid.data$Personal.Loan,p=0.625, list=FALSE)
+train.data = trainvalid.data[train.index,]
+valid.data = trainvalid.data[-train.index,]
+Train.D <- colMeans(train.data)
+Valid.D <- colMeans(valid.data)
+sprintf("%.3f", Train.D)
+sprintf("%.3f", Valid.D)
+rm(Train.D)
+rm(Valid.D)
+``` 
+
+
+```{r}
+###Normalizing
+
+train_normalization <- train.data
+valid_normalization <- valid.data
+normalization_values <- preProcess(train.data[, c("Age","Experience","Income","CCAvg","Mortgage")], method=c("center", "scale"))
+train_normalization[, c("Age","Experience","Income","CCAvg","Mortgage")] <- predict(normalization_values, train.data[, c("Age","Experience","Income","CCAvg","Mortgage")])
+valid_normalization[, c("Age","Experience","Income","CCAvg","Mortgage")] <- predict(normalization_values, valid.data[, c("Age","Experience","Income","CCAvg","Mortgage")])
+summary(train_normalization) 
+summary(valid_normalization)
+```

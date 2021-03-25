@@ -1,0 +1,90 @@
+---
+title: "ML3"
+author: "Noorahh"
+output: html_document
+---
+
+
+
+```{r}
+#First I will load the packages
+library(dplyr)
+library(utils)
+library(caret)
+library(factoextra)
+library(ggplot2)
+library(tidyverse)
+library(cowplot)
+```
+
+```{r}
+#Second I would explore the dataset
+Pharm <- read_csv("~/Desktop/MSBA-spring 2021/ML/ML4/Pharm.csv")
+head(Pharm)
+str(Pharm)
+summary(Pharm)
+dim(Pharm)
+colMeans(is.na(Pharm))
+```
+
+
+```{r}
+set.seed(123)
+PharmDrug<-Pharm[ ,c(3,4,5,6,7,8,9,10,11)]
+PharmNorm<-scale(PharmDrug)#Normalizing
+Clus<-kmeans(PharmNorm, centers = 5, nstart = 50)# Running with clusters K=5
+PharmDrug$Cluster <-Clus$cluster
+PharmDrug$MedianRec <-Pharm[,c(12)]
+PharmDrug$Location <-Pharm[, c(13)]
+PharmDrug$Exchange <-Pharm[, c(14)]
+Clus1<-PharmDrug[order(PharmDrug$Cluster),]
+Clus1
+```
+
+
+
+```{r}
+#running k-means algorithm with k=3 so it can be easier to manage 
+set.seed(123)
+PharmDrug1<-Pharm[ ,c(3,4,5,6,7,8,9,10,11)]
+PharmNorm1<-scale(PharmDrug1)#Normalizing
+Clus<-kmeans(PharmNorm1, centers = 3, nstart = 50)# Running with clusters K=5
+PharmDrug1$Cluster1 <-Clus$cluster
+PharmDrug1$MedianRec1 <-Pharm[,c(12)]
+PharmDrug1$Location1 <-Pharm[, c(13)]
+PharmDrug1$Exchange1 <-Pharm[, c(14)]
+Clus1<-PharmDrug[order(PharmDrug1$Cluster1),]
+Clus1
+```
+
+```{r}
+
+Pharm2 <-  Pharm %>% select(c(12,13,14)) %>%
+    mutate(Cluster = PharmDrug1$Cluster1)
+```
+
+```{r}
+#plotting clusters
+MedianRec <- ggplot(Pharm2, mapping = aes(factor(Cluster), fill=Median_Recommendation)) +
+  geom_bar(position = 'dodge') +
+  labs(x='Clusters', y='Frequence')
+
+LocationPharm <- ggplot(Pharm2, mapping = aes(factor(Cluster), fill=Location)) +
+  geom_bar(position = 'dodge') + 
+  labs(x='Clusters', y='Frequence')
+
+ExchangePharm <- ggplot(Pharm2, mapping = aes(factor(Cluster), fill=Exchange)) +
+ geom_bar(position = 'dodge') + 
+  labs(x='Clusters', y='Frequence')
+
+plot_grid(MedianRec, LocationPharm,ExchangePharm)
+
+```
+
+
+###Summerizing, wraping up :)
+Cluster 1 , has low profit and they need to enhanve thier ptofitibilty with investors 
+
+Cluster 2, has high estimated revenue due to the low turnover form investors   
+
+Cluster 3, has the best result becuse it has the best recommandtions

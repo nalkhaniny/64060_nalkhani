@@ -1,0 +1,136 @@
+---
+title: "Assignment 3"
+author: "Noorah"
+date: "4/27/2021"
+output: html_document
+---
+
+
+```{r}
+###Reading the file
+hc<- read.csv("~/Desktop/MSBA-spring 2021/ML/ML5/cereals.csv")
+```
+
+```{r}
+###Installing packages 
+library(class)
+library(cluster)
+library(caret)
+library(lattice)
+library(ggplot2)
+library(FNN)
+library(e1071)
+library(fpc)
+library(dendextend)
+library(factoextra)
+```
+
+```{r}
+###Data Reprocessing. Remove all cereals with missing values
+table(complete.cases(hc))
+##there are 3 rows that have missing values
+dr <- hc[complete.cases(hc),]
+table(complete.cases(dr))
+#there are now 74 complete rows :)
+
+```
+
+```{r}
+###naming the rows and normalizign data
+hc1 <- hc
+row.names(hc1) <- hc1[,1]
+hc1 <- hc1[,-c(1:3)]
+dim(hc1)
+ENM <- scale(hc1)
+head(ENM)
+summary(ENM)
+```
+
+
+```{r}
+###Apply hierarchical clustering to the data using Euclidean distance to the normalized measurements. 
+dr <- hc[complete.cases(hc),]
+row.names(dr)<-dr[,1]
+dr<-dr [,-1:-5]
+ENM <- sapply(dr, scale)
+ENM1<- dist(ENM, method = 'euclidean')
+set.seed(123) 
+###Use Agnes to compare the clustering from single linkage, complete linkage, average linkage, and Ward.
+Agens.single <- agnes(ENM1, method='single')
+Agnes.complete  <- agnes(ENM1, method='complete')
+Agens.average  <- agnes(ENM1, method='average')
+Agens.ward  <- agnes(ENM1, method='ward')
+###Choose the best method.
+print(Agens.single)
+print(Agnes.complete)
+print(Agens.average)
+print(Agens.ward)
+###Ward clustering is the best algorithm since it has the closest agglomerative coefficient to 1 
+plot<- pltree(Agens.ward, cex = 0.6, hang = -1)
+
+```
+
+
+
+
+```{r}
+###How many clusters would you choose?
+fviz_nbclust(ENM, FUN = hcut, method = "wss")
+fviz_nbclust(ENM, FUN = hcut, method = "silhouette")
+
+### I would choose 5 clusters due to the distance and partition
+```
+
+
+```{r}
+###Comment on the structure of the clusters and on their stability. Hint: To check stability,partition the data and see how well clusters formed based on one part apply to the other part. To do this:
+#Cluster partition A
+#Use the cluster centroids from A to assign each record in partition B (each record is assigned to the cluster with the closest centroid).
+#Assess how consistent the cluster assignments are compared to the assignments based on all the data.
+
+cluster5 <- cutree(Agens.ward, k=5)
+cluster5
+cluster5 <- fviz_cluster(list(data = ENM, cluster = cluster5))
+```
+
+```{r}
+set.seed(123)
+dp <- createDataPartition(hc[,"calories"], p=0.5, list=FALSE)
+p1 <- hc[dp, ]
+p2 <- hc[-dp, ]
+summary(p1[,"calories"])
+summary(p2[,"calories"])
+###data is eqully distributed into 2 partitions
+```
+
+
+```{r}
+set.seed(555)
+p11 <- agnes(p1, method = "ward")
+p22 <- agnes(p2, method = "ward")
+#comparing agglomerative coefficient and dendrogram
+print(p11$ac)
+print(p22$ac)
+plot11<- pltree(p11, cex = 0.6, hang = -1)
+plot22 <- pltree(p22, cex = 0.6, hang = -1)
+```
+
+
+```{r}
+###The elementary public schools would like to choose a set of cereals to include in their daily cafeterias. Every day a different cereal is offered, but all cereals should support a healthy diet. For this goal, you are requested to find a cluster of “healthy cereals.” Should the data be normalized? If not, how should they be used in the cluster analysis?
+
+###healthyc <- cbind(cluster5, ENM)
+###median.table
+
+### using the median to identify the best cluster, choosing the first one since it has the highest fiber
+
+
+
+### I made this answer as a comment because it is working with me when I knit it :( 
+
+```
+
+
+
+
+
